@@ -4,7 +4,7 @@ import TodoList from './components/TodoList.vue';
 
 <template>
   <div class="container">
-    <img src="./assets/taskhublogo.png" class="logo" alt="TaskHub Logo" width="auto" />
+    <img src="./assets/taskhub-logo.png" class="logo" alt="TaskHub Logo" width="auto" />
     <TodoList title="Organize your daily tasks" />
   </div>
 </template>
@@ -12,10 +12,11 @@ import TodoList from './components/TodoList.vue';
 <style scoped>
 * {
   background-color: #FFFFFF;
-  width: 60vw;
-  height: 80vh;
+  width: 65vw;
+  height: fit-content;
+  padding: 2em;
   border: none;
-  border-radius: 2em;
+  border-radius: 1em;
 }
 
 .container {
@@ -29,6 +30,5 @@ import TodoList from './components/TodoList.vue';
   width: 30vw;
   height: auto;
   padding: 2em 0 0 0;
-  margin-top: 2em;
 }
 </style>

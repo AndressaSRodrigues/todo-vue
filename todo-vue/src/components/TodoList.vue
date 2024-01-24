@@ -13,6 +13,14 @@ const todos = ref([
     { id: id++, text: 'You can add, edit or remove tasks. Try it out.', done: false }
 ])
 
+const hideCompleted = ref(false)
+
+const filteredTodos = computed(() => {
+    return hideCompleted.value
+        ? todos.value.filter((el) => !el.done)
+        : todos.value
+})
+
 function addTodo() {
     todos.value.push({ id: id++, text: newTodo.value, done: false })
     newTodo.value = ''
@@ -26,68 +34,123 @@ function removeTodo(todo) {
 
 <template>
     <h1>{{ title }}</h1>
-    <form class="new-task-form" @submit.prevent="addTodo">
-        <input v-model="newTodo" placeholder="Add a new task" />
-        <button>Add</button>
+
+    <form @submit.prevent="addTodo" class="task-form">
+        <input v-model="newTodo" placeholder="Add a new task" class="add-task" />
+        <button class="button-add">Add</button>
     </form>
 
-    <ul class="todo-list">
-        <li v-for="todo in todos" :key="todo.id">
-            <input type="checkbox" v-model="todo.done">
+    <ol class="list">
+        <li v-for="todo in filteredTodos" :key="todo.id" class="list-items">
             <span :class="{ done: todo.done }">{{ todo.text }}</span>
-            <button @click="removeTodo(todo)">X</button>
+            <div class="actions">
+                <input type="checkbox" v-model="todo.done" class="check">
+                <button @click="removeTodo(todo)" class="button-remove">x</button>
+            </div>
         </li>
-    </ul>
+    </ol>
+
+    <button @click="hideCompleted = !hideCompleted" class="button-hide">
+        {{ hideCompleted ? 'Show All Tasks' : 'Hide Completed Tasks' }}
+    </button>
 </template>
 
 <style scoped>
 h1 {
     font-size: 1.5em;
-    color: #83C0C1;
+    color: #EE0077;
 }
 
-.new-task-form {
+.task-form {
+    width: 65vw;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin-top: 2em;
+    justify-content: space-between;
+    padding: 0.5em;
 }
 
-input {
-    width: 22em;
+.add-task {
+    width: 82%;
     padding: 1em;
-    color: #6C22A6;
+    color: #420077;
     background-color: #FFFFFF;
-    border: 2px solid #B461D9;
+    border: 2px solid #420077;
     border-radius: 0.5em;
 }
 
-button {
-    width: 4em;
-    margin-left: 1em;
+.button-add, .button-remove, .button-hide {
     border: none;
     border-radius: 0.5em;
-    background-color: #B461D9;
+}
+
+.button-add {
+    width: 4em;
+    height: 3.5em;
+    margin-left: 1em;
+    background-color: #420077;
     font-weight: bold;
 }
 
-.todo-list {
-    color: #6C22A6;
-    list-style: none;
+.list {
+    width: 65vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
 }
 
-input[type="checkbox"] {
+.list-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    color: #420077;
+    border: 1px solid #E4E4E4;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.check {
     appearance: none;
-    width: 20px;
-    margin-right: 20px;
-    background-color: #fff;
+    width: 1.5em;
+    height: 1.5em;
+    border: 1px solid #EE0077;
+    border-radius: 0.5em;
 }
 
-input[type="checkbox"]:checked {
-    background-color: #83C0C1;
+.check:checked {
+    background-color: #EE0077;
+}
+
+.button-remove {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: #420077;
+    margin-left: 1em;
+    font-weight: bold;
 }
 
 .done {
     text-decoration: line-through;
+}
+
+.button-hide {
+    width: 12em;
+    height: 3em;
+    background-color: #EE0077;
+}
+
+.button-hide:hover {
+    background-color: #420077;
+    cursor: pointer;
 }
 </style>
