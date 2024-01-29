@@ -106,7 +106,6 @@ onMounted(() => {
 .list-item {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
     border: 1px solid #EEEEEE;
@@ -139,7 +138,7 @@ input[type='checkbox'] {
     background-color: #FF6868;
     border: none;
     border-radius: 2px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     color: #EEEEEE;
 }
