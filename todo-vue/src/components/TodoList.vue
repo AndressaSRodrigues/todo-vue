@@ -1,10 +1,6 @@
 <script setup>
 import { computed, ref, watch, onMounted } from 'vue';
 
-defineProps({
-    title: String
-})
-
 const newTodo = ref('')
 
 let id = 0
@@ -42,125 +38,114 @@ onMounted(() => {
 </script>
 
 <template>
-    <h1>{{ title }}</h1>
-
-    <form @submit.prevent="addTodo" class="task-form">
-        <input v-model="newTodo" placeholder="Add a new task" class="add-task" />
-        <button class="button-add" :disabled="newTodo.trim() === ''">Add</button>
+    <form @submit.prevent="addTodo" class="tasks-form">
+        <input v-model="newTodo" placeholder="Add a new task" class="add-input" />
+        <button class="add-button" :disabled="newTodo.trim() === ''">ADD</button>
     </form>
 
-    <ol class="list">
-        <li v-for="todo in filteredTodos" :key="todo.id" class="list-items">
-            <span :class="{ done: todo.done }">{{ todo.text }}</span>
+    <ul class="todos-list">
+        <li v-for="todo in filteredTodos" :key="todo.id" class="list-item">
+            <p :class="{ done: todo.done }">{{ todo.text }}</p>
             <div class="actions">
-                <input type="checkbox" v-model="todo.done" class="check">
-                <button @click="removeTodo(todo)" class="button-remove">x</button>
+                <input type="checkbox" v-model="todo.done">
+                <button @click="removeTodo(todo)" class="delete-task">Delete</button>
             </div>
         </li>
-    </ol>
+    </ul>
 
-    <button @click="hideCompleted = !hideCompleted" class="button-hide">
+    <button @click="hideCompleted = !hideCompleted" class="hide-button">
         {{ hideCompleted ? 'Show All Tasks' : 'Hide Completed Tasks' }}
     </button>
 </template>
 
 <style scoped>
-h1 {
-    font-size: 1em;
-    color: #EE0077;
-    text-align: center;
-}
-
-.task-form {
-    width: 65vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.5em;
-}
-
-.add-task {
-    width: 82%;
-    padding: 1em;
-    color: #420077;
-    background-color: #FFFFFF;
-    border: 2px solid #420077;
-    border-radius: 0.5em;
-}
-
-.button-add, .button-remove, .button-hide {
-    border: none;
-    border-radius: 0.5em;
-}
-
-.button-add {
-    width: 4em;
-    height: 3.5em;
-    margin-left: 1em;
-    background-color: #420077;
-    font-weight: bold;
-}
-
-.list {
-    width: 65vw;
+.tasks-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 0.5em;
+    justify-content: center;
+    gap: 5px;
 }
 
-.list-items {
+.add-input {
+    padding: 1rem;
+    border: 1px solid #EE0077;
+    border-radius: 4px;
+}
+
+.add-button,
+.hide-button {
+    padding: 0.5rem;
+    background-color: #EE0077;
+    border: 1px solid #EE0077;
+    border-radius: 4px;
+    color: #EEEEEE;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hide-button:hover,
+.add-button:hover {
+    background-color: #420077;
+}
+
+.add-button:disabled,
+.add-button:disabled:hover {
+    background-color: #EEEEEE;
+    color: darkgrey;
+    border: none;
+    cursor: not-allowed;
+}
+
+.todos-list {
+    padding: 0;
+    text-align: start;
+    margin-top: 2rem;
+}
+
+.list-item {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-    color: #420077;
-    border: 1px solid #E4E4E4;
-    border-radius: 0.5em;
-    margin-bottom: 1em;
+    gap: 10px;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 5px 0;
+}
+
+.list-item p {
+    width: 100%;
 }
 
 .actions {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    gap: 10px;
     align-items: center;
-    margin-right: 1em;
 }
 
-.check {
-    appearance: none;
-    width: 1.5em;
-    height: 1.5em;
-    border: 1px solid #EE0077;
-    border-radius: 0.5em;
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    color: #EEEEEE;
+    accent-color: #9DBC98;
 }
 
-.check:checked {
-    background-color: #EE0077;
+.delete-task {
+    width: 45px;
+    height: 22px;
+    background-color: #FF6868;
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #EEEEEE;
 }
 
-.button-remove {
-    width: 1.5em;
-    height: 1.5em;
-    background-color: #420077;
-    margin-left: 1em;
-    font-weight: bold;
-}
-
-.done {
-    text-decoration: line-through;
-}
-
-.button-hide {
-    width: 12em;
-    height: 3em;
-    background-color: #EE0077;
-}
-
-.button-hide:hover {
-    background-color: #420077;
-    cursor: pointer;
+.hide-button {
+    width: 100%;
+    margin: 10px 0 20px 0;
 }
 </style>
