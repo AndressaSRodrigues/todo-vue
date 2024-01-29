@@ -1,11 +1,15 @@
 <script setup>
 import TodoList from './components/TodoList.vue';
+import Footer from './components/Footer.vue';
+import Navbar from './components/Navbar.vue';
+import mainImg from './assets/taskhubmain.jpg'
 </script>
 
 <template>
+  <Navbar/>
   <main>
     <section>
-      <h1>TaskHub</h1>
+      <img :src="mainImg" alt="Two people organizing their tasks" width="80%">
       <h2>Organize your daily tasks</h2>
     </section>
 
@@ -13,6 +17,7 @@ import TodoList from './components/TodoList.vue';
       <TodoList />
     </section>
   </main>
+  <Footer/>
 </template>
 
 <style scoped>
@@ -34,4 +39,12 @@ h2 {
   font-size: 1.2rem;
   margin: 0 0 3rem 0;
 }
+
+@media screen and (min-width: 800px) {
+  main {
+    padding: 0 25rem;
+  }
+}
+
+
 </style>
