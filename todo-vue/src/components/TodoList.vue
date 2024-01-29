@@ -38,24 +38,26 @@ onMounted(() => {
 </script>
 
 <template>
-    <form @submit.prevent="addTodo" class="tasks-form">
-        <input v-model="newTodo" placeholder="Add a new task" class="add-input" />
-        <button class="add-button" :disabled="newTodo.trim() === ''">ADD</button>
-    </form>
+    <section>
+        <form @submit.prevent="addTodo" class="tasks-form">
+            <input v-model="newTodo" placeholder="Add a new task" class="add-input" />
+            <button class="add-button" :disabled="newTodo.trim() === ''">ADD</button>
+        </form>
 
-    <ul class="todos-list">
-        <li v-for="todo in filteredTodos" :key="todo.id" class="list-item">
-            <p :class="{ done: todo.done }">{{ todo.text }}</p>
-            <div class="actions">
-                <input type="checkbox" v-model="todo.done">
-                <button @click="removeTodo(todo)" class="delete-task">Delete</button>
-            </div>
-        </li>
-    </ul>
+        <ul class="todos-list">
+            <li v-for="todo in filteredTodos" :key="todo.id" class="list-item">
+                <p :class="{ done: todo.done }">{{ todo.text }}</p>
+                <div class="actions">
+                    <input type="checkbox" v-model="todo.done">
+                    <button @click="removeTodo(todo)" class="delete-task">Delete</button>
+                </div>
+            </li>
+        </ul>
 
-    <button @click="hideCompleted = !hideCompleted" class="hide-button">
-        {{ hideCompleted ? 'Show All Tasks' : 'Hide Completed Tasks' }}
-    </button>
+        <button @click="hideCompleted = !hideCompleted" class="hide-button">
+            {{ hideCompleted ? 'Show All Tasks' : 'Hide Completed Tasks' }}
+        </button>
+    </section>
 </template>
 
 <style scoped>
@@ -146,5 +148,24 @@ input[type='checkbox'] {
 .hide-button {
     width: 100%;
     margin: 10px 0 20px 0;
+}
+
+@media screen and (min-width: 800px) {
+    .tasks-form {
+        width: 60vw;
+        flex-direction: row;
+    }
+
+    .add-input {
+        width: 100%;
+    }
+
+    .add-button {
+        width: 10%;
+    }
+
+    .hide-button {
+        width: 20%;
+    }
 }
 </style>
