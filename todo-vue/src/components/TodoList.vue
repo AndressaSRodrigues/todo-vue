@@ -60,7 +60,7 @@ onMounted(() => {
 
 <style scoped>
 .tasks-form {
-    width: 100%;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
