@@ -6,9 +6,9 @@ import cvIcon from '../assets/cv.png'
 
 <template>
     <footer>
-        <a href="https://github.com/AndressaSRodrigues"><img :src="gitHubIcon" alt="GitHub" class="icon" /></a>
-        <a href="https://www.linkedin.com/in/andressa-webdev/"><img :src="likedinIcon" alt="Linkedin" class="icon" /></a>
-        <a href="https://flowcv.com/resume/0p0cbjhncd"><img :src="cvIcon" alt="Resume" class="icon" /></a>
+        <a href="https://github.com/AndressaSRodrigues" target="_blank"><img :src="gitHubIcon" alt="GitHub" class="icon" /></a>
+        <a href="https://www.linkedin.com/in/andressa-webdev/" target="_blank"><img :src="likedinIcon" alt="Linkedin" class="icon" /></a>
+        <a href="https://flowcv.com/resume/0p0cbjhncd" target="_blank"><img :src="cvIcon" alt="Resume" class="icon" /></a>
     </footer>
 </template>
 
