@@ -3,32 +3,35 @@ import TodoList from './components/TodoList.vue';
 </script>
 
 <template>
-  <div class="container">
-    <img src="./assets/taskhub-logo.png" class="logo" alt="TaskHub Logo" width="auto" />
-    <TodoList title="Organize your daily tasks" />
-  </div>
+  <main>
+    <section>
+      <h1>TaskHub</h1>
+      <h2>Organize your daily tasks</h2>
+    </section>
+
+    <section>
+      <TodoList />
+    </section>
+  </main>
 </template>
 
 <style scoped>
-* {
-  background-color: #FFFFFF;
-  width: 65vw;
-  height: fit-content;
-  padding: 2em;
-  border: none;
-  border-radius: 1em;
-}
-
-.container {
-  margin: 2em;
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 1em;
+  text-align: center;
 }
 
-.logo {
-  width: 50vw;
-  height: auto;
-  padding: 2em 0 0 0;
+h1 {
+  font-size: 4rem;
+  color: #EE0077;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 0 0 3rem 0;
 }
 </style>
