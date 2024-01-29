@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 
 defineProps({
     title: String
@@ -30,6 +30,15 @@ function removeTodo(todo) {
     todos.value = todos.value.filter((el) => el !== todo)
 }
 
+watch(todos, newVal => {
+    localStorage.setItem('todos', JSON.stringify(newVal))
+}, { deep: true })
+
+onMounted(() => {
+    const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    todos.value = storedTodos;
+});
+
 </script>
 
 <template>
@@ -37,7 +46,7 @@ function removeTodo(todo) {
 
     <form @submit.prevent="addTodo" class="task-form">
         <input v-model="newTodo" placeholder="Add a new task" class="add-task" />
-        <button class="button-add">Add</button>
+        <button class="button-add" :disabled="newTodo.trim() === ''">Add</button>
     </form>
 
     <ol class="list">
@@ -57,8 +66,9 @@ function removeTodo(todo) {
 
 <style scoped>
 h1 {
-    font-size: 1.5em;
+    font-size: 1em;
     color: #EE0077;
+    text-align: center;
 }
 
 .task-form {

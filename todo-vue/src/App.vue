@@ -27,7 +27,7 @@ import TodoList from './components/TodoList.vue';
 }
 
 .logo {
-  width: 30vw;
+  width: 50vw;
   height: auto;
   padding: 2em 0 0 0;
 }
